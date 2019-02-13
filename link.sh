@@ -26,6 +26,7 @@ server {
 EOF
 sudo mv /tmp/$MY_DOMAIN.$HOST_NAME /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
 sudo nginx -s reload
+sudo certbot --nginx -n -q --agree-tos --redirect --register-unsafely-without-email -d $MY_DOMAIN.$HOST_NAME
 echo "Your Dynamic link is $MY_DOMAIN.$HOST_NAME"
 else 
 	echo "Your Domain Already registered $EXIST"
