@@ -7,8 +7,8 @@ echo "Welcome, let me gather some info..."
 S_STRING="`echo $SSH_CLIENT | cut -f1 -d" "` port `echo $SSH_CLIENT | cut -f2 -d" "`"
 CON_PID=`sudo tail -n 300 /var/log/auth.log | grep "$S_STRING" | cut -f2 -d"[" | cut -f1 -d"]" | tail -n 1 `
 CON_PID=`sudo tail -n 300 /var/log/auth.log | grep "$CON_PID" | grep "User child is on pid " | rev | cut -d" " -f1 | rev | tail -n 1`
-MY_DOMAIN=`sudo tail -n 300 /var/log/auth.log | grep "$CON_PID" | grep "tcpip-forward listen" | rev | cut -d" " -f3 | rev | tail -n 1`
-MY_PORT=`sudo tail -n 300 /var/log/auth.log | grep "$CON_PID" | grep "tcpip-forward listen" | rev | cut -d" " -f1 | rev | tail -n 1`
+MY_DOMAIN=`sudo tail -n 300 /var/log/auth.log | grep "$CON_PID" | grep "tcpip-forward listen" | rev | cut -d" " -f3 | rev | tail -n 1 | sed /_/s//-/`
+MY_PORT=`sudo tail -n 300 /var/log/auth.log | grep "$CON_PID" | grep "tcpip-forward listen" | rev | cut -d" " -f1 | rev | tail -n 1 | cut -f1 -d"."`
 MY_PORT=`echo $MY_PORT | cut -f1 -d"."`
 
 if [ "$MY_PORT" -lt "1024" ]; then
