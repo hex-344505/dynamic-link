@@ -2,7 +2,7 @@
 
 trap ctrl_c INT
 function ctrl_c() {
-        echo "** Trapped CTRL-C"
+        echo "Got CTRL-C, lets clean up..."
 	sudo rm /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
 	sudo nginx -s reload
 	exit 0
