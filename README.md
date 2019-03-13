@@ -36,9 +36,8 @@ USAGE
 <> - required parameter  
 
 Example  
-`ssh -R 4026:127.0.0.1:80 link@link.example.com		
-
-ssh -R own-name:4026:127.0.0.1:80 link@link.example.com`  
+`ssh -R 4026:127.0.0.1:80 link@link.example.com`  
+`ssh -R own-name:4026:127.0.0.1:80 link@link.example.com`  
 
 
 
