@@ -1,4 +1,13 @@
 #!/bin/bash
+
+trap ctrl_c INT
+function ctrl_c() {
+        echo "** Trapped CTRL-C"
+	sudo rm /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
+	sudo nginx -s reload
+	exit 0
+}
+
 C_TIME="`date +"%b %d %R:%S"`"
 HOST_NAME="`hostname -f`"
 
@@ -23,11 +32,6 @@ if [ "$MY_DOMAIN" = "localhost" ]; then
 	MY_DOMAIN=$NEW_DOMAIN
 fi
 
-EXIST=`grep -lr $MY_PORT /etc/nginx/sites-enabled/ | rev | cut -d"/" -f1 | rev | tail -n 1`
-
-echo "Checking if DOMAIN exists..."
-if [ "$EXIST" = "" ] ; then
-echo "Its new domain, let me generate config for it..."
 cat <<EOF > /tmp/$MY_DOMAIN.$HOST_NAME
 server {
 	listen 80;
@@ -39,14 +43,12 @@ server {
 	}
 }
 EOF
-sudo mv /tmp/$MY_DOMAIN.$HOST_NAME /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
-sudo nginx -s reload
-echo "Almost ready, generating free certificate..."
-sudo certbot --nginx -n -q --agree-tos --redirect --register-unsafely-without-email -d $MY_DOMAIN.$HOST_NAME
-echo "All done, your link is https://$MY_DOMAIN.$HOST_NAME"
-else 
-	echo "Your Domain Already registered, link https://$EXIST"
-fi
-env > /tmp/env
+	sudo mv /tmp/$MY_DOMAIN.$HOST_NAME /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
+	sudo nginx -s reload
+	sudo certbot --nginx -n -q --agree-tos --redirect --register-unsafely-without-email -d $MY_DOMAIN.$HOST_NAME
+	echo "All done, your link is https://$MY_DOMAIN.$HOST_NAME"
+
 echo 'Hit CTRL+C to stop tunneling'
-while :; do sleep 1; done
+while [ "$(ps -q $CON_PID -o cmd=)" != "" ]; do
+        sleep 5;
+done
