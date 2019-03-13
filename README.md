@@ -2,6 +2,7 @@
 Serveo OWN Alternative
 OS Ubuntu 18.04.1 LTS
 Need nginx ssh and sudo
+auto clean up after Ctrl+C
 
 Highlights
 
@@ -32,7 +33,8 @@ USAGE
 
 Example	
 ssh -R 4026:127.0.0.1:80 link@link.example.com		
+
 ssh -R own-name:4026:127.0.0.1:80 link@link.example.com		
 
-auto clean up after Ctrl+C
+
 
