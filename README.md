@@ -31,6 +31,8 @@ chmod 755 /etc/ssh/link.sh
 USAGE	
 
 Example	
-ssh -R 4026:127.0.0.1:80 link@link.example.com	
-ssh -R own-name:4026:127.0.0.1:80 link@link.example.com	
+ssh -R 4026:127.0.0.1:80 link@link.example.com		
+ssh -R own-name:4026:127.0.0.1:80 link@link.example.com		
+
+auto clean up after Ctrl+C
 
