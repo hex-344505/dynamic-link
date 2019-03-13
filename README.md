@@ -31,7 +31,7 @@ chmod 755 /etc/ssh/link.sh
 
 USAGE 
 
-ssh -R [desired-name:]<remote-port>:localhost:<localport> link@link.example.com  
+`ssh -R [desired-name:]<remote-port>:localhost:<localport> link@link.example.com`  
 	
 [] - optinal parameter
 	
