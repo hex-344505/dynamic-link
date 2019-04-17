@@ -11,22 +11,27 @@ edit /etc/hostname - put there FQDN of your server
 add DNS recor to your zone 
 *.<server-name>   <server ip>
 
-cat /etc/ssh/sshd_config	
-.....	
-LogLevel DEBUG	
-.....	
-Match User link	
+cat /etc/ssh/sshd_config  
+.....  
+`LogLevel DEBUG	`  
+.....  
+`Match User link	
 	PermitTTY yes	
-	ForceCommand /etc/ssh/link.sh	
+	ForceCommand /etc/ssh/link.sh	`
 
 adduser link	
 
-cat /etc/sudoers	
-....	
-%link ALL=NOPASSWD:ALL	
+cat /etc/sudoers  
+....  
+`%link ALL=NOPASSWD:ALL	`  
 
 
 chmod 755 /etc/ssh/link.sh	
+
+cat /etc/nginx/nginx.conf  
+......  
+`log_format web-req '[$time_local] $request_method "$request_uri" $status';`  
+......  
 
 
 USAGE  
