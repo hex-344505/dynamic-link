@@ -15,9 +15,9 @@ cat /etc/ssh/sshd_config
 .....  
 `LogLevel DEBUG	`  
 .....  
-`Match User link	
-	PermitTTY yes	
-	ForceCommand /etc/ssh/link.sh	`
+`Match User link`  
+`	PermitTTY yes`  
+`	ForceCommand /etc/ssh/link.sh`  
 
 adduser link	
 
@@ -43,6 +43,3 @@ USAGE
 Example  
 `ssh -R 4026:127.0.0.1:80 link@link.example.com`  
 `ssh -R own-name:4026:127.0.0.1:80 link@link.example.com`  
-
-
-
