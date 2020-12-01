@@ -42,18 +42,19 @@ map \$http_upgrade \$connection_upgrade {
     }
 
 server {
-	listen 80;
-	server_name $MY_DOMAIN.$HOST_NAME;
-	access_log /var/log/nginx/$MY_DOMAIN.$HOST_NAME web-req;
-	error_log /var/log/nginx/$MY_DOMAIN.$HOST_NAME warn;
-	location / {
-	proxy_pass http://127.0.0.1:$MY_PORT;
-	proxy_set_header Host $MY_DOMAIN.$HOST_NAME; 
-	gzip off;
-	proxy_http_version 1.1;
+        listen 80;
+        server_name $MY_DOMAIN.$HOST_NAME;
+        access_log /var/log/nginx/$MY_DOMAIN.$HOST_NAME web-req;
+        error_log /var/log/nginx/$MY_DOMAIN.$HOST_NAME warn;
+        location / {
+        proxy_pass http://127.0.0.1:$MY_PORT;
+        proxy_set_header Host $MY_DOMAIN.$HOST_NAME; 
+        gzip off;
+        proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection \$connection_upgrade;
-	}
+        proxy_set_header X-Forwarded-Proto https;
+        }
 }
 EOF
 	sudo mv /tmp/$MY_DOMAIN.$HOST_NAME /etc/nginx/sites-enabled/$MY_DOMAIN.$HOST_NAME
